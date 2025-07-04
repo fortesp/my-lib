@@ -3,10 +3,18 @@ import { format } from '../../utils/utils';
 
 @Component({
   tag: 'my-component',
-  styleUrl: 'my-component.css',
-  shadow: true,
+  styleUrls: {
+    "light": 'my-component.light.scss',
+    "dark": 'my-component.dark.scss'
+  },
+  shadow: true
 })
 export class MyComponent {
+  /**
+   * The first name
+   */
+  @Prop() mode: "dark" | "light" = "dark";
+
   /**
    * The first name
    */
@@ -27,6 +35,6 @@ export class MyComponent {
   }
 
   render() {
-    return <div>Hello, World! I'm {this.getText()}</div>;
+    return <div class="component">Hello, World! I'm {this.getText()}</div>;
   }
 }

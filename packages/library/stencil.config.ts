@@ -1,7 +1,13 @@
 import { Config } from '@stencil/core';
+import { reactOutputTarget } from "@stencil/react-output-target";
+import { sass } from "@stencil/sass";
 
 export const config: Config = {
-  namespace: 'my-lib',
+  namespace: 'library',
+  globalScript: 'src/global.ts',
+  plugins: [
+    sass()
+  ],
   outputTargets: [
     {
       type: 'dist',
@@ -9,8 +15,8 @@ export const config: Config = {
     },
     {
       type: 'dist-custom-elements',
-      customElementsExportBehavior: 'auto-define-custom-elements',
       externalRuntime: false,
+      dir: 'components'
     },
     {
       type: 'docs-readme',
@@ -19,6 +25,9 @@ export const config: Config = {
       type: 'www',
       serviceWorker: null, // disable service workers
     },
+    reactOutputTarget({
+      outDir: '../library-react/src'
+    }),
   ],
   testing: {
     browserHeadless: "shell",
